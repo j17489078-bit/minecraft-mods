@@ -1,0 +1,7 @@
+{
+  "name": "hide-and-seek-mods",
+  "private": true,
+  "scripts": {
+    "build": "node generate-mods.js"
+  }
+}
