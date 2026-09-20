@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hide &amp; Seek — Mod Files</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+<style>
+  :root {
+    --bg: #0d0f12;
+    --panel: #151a20;
+    --panel-2: #1b222a;
+    --border: #2a333d;
+    --border-hi: #3b4854;
+    --text: #e6edf3;
+    --muted: #8b98a5;
+    --green: #63c74d;
+    --green-dark: #2f6b21;
+    --amber: #e0a83c;
+    --amber-dark: #7a5a15;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% -10%, rgba(99, 199, 77, 0.12), transparent 45%),
+      radial-gradient(circle at 90% 0%, rgba(80, 130, 220, 0.10), transparent 40%);
+    background-repeat: no-repeat;
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13, 15, 18, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; height: 58px;
+  }
+  .brand {
+    font-family: 'Silkscreen', monospace;
+    font-size: 14px; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 9px;
+    color: var(--text); text-decoration: none;
+  }
+  .brand .dot {
+    width: 12px; height: 12px; background: var(--green);
+    box-shadow: 0 0 0 2px var(--green-dark), 0 0 12px rgba(99,199,77,.7);
+    flex: none;
+  }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+  header.hero { padding: 64px 0 40px; }
+  .kicker {
+    display: inline-block;
+    font-family: 'Silkscreen', monospace;
+    font-size: 11px; letter-spacing: 2px;
+    color: var(--green);
+    border: 2px solid var(--green-dark);
+    background: rgba(99,199,77,.08);
+    padding: 5px 12px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(26px, 5.5vw, 46px);
+    line-height: 1.25;
+    margin: 0 0 18px;
+    letter-spacing: -0.5px;
+  }
+  h1 .accent { color: var(--green); }
+  .lede {
+    color: var(--muted); font-size: 17px; max-width: 620px; margin: 0 0 26px;
+  }
+  .meta-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .meta-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--panel); border: 2px solid var(--border);
+    padding: 7px 13px; font-size: 13px; font-weight: 600; color: var(--muted);
+  }
+  .meta-chip b { color: var(--text); font-weight: 600; }
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    padding: 18px; margin-bottom: 26px;
+    background: var(--panel); border: 2px solid var(--border);
+  }
+  .search-wrap { position: relative; flex: 1 1 220px; min-width: 180px; }
+  .search-wrap input {
+    width: 100%; padding: 11px 14px;
+    background: var(--panel-2); border: 2px solid var(--border);
+    color: var(--text); font-family: inherit; font-size: 14px;
+    outline: none; transition: border-color .15s;
+  }
+  .search-wrap input:focus { border-color: var(--green-dark); }
+  .search-wrap input::placeholder { color: #5c6874; }
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    margin-bottom: 60px;
+  }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--panel); border: 2px solid var(--border);
+    padding: 20px;
+    transition: border-color .18s, transform .18s;
+  }
+  .card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+  .card-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 12px; margin-bottom: 12px;
+  }
+  .card-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 15px; margin: 0; line-height: 1.35; color: var(--text);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .chip {
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    background: var(--panel-2); border: 1px solid var(--border);
+    padding: 3px 8px;
+  }
+  .card-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    padding: 10px 14px; cursor: pointer; text-decoration: none;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    border: 2px solid transparent; transition: all .15s;
+  }
+  .btn-primary {
+    background: var(--green); color: #06210a; border-color: var(--green);
+    flex: 1;
+  }
+  .btn-primary:hover { background: #78dc60; border-color: #78dc60; }
+  .btn-ghost {
+    background: transparent; color: var(--muted); border-color: var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hi); color: var(--text); }
+  .empty {
+    grid-column: 1 / -1; text-align: center; padding: 60px 20px;
+    color: var(--muted); border: 2px dashed var(--border);
+  }
+  section { margin-bottom: 60px; }
+  h2 {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(19px, 3vw, 25px);
+    margin: 0 0 8px; letter-spacing: -0.3px;
+  }
+  .section-sub { color: var(--muted); font-size: 15px; margin: 0 0 26px; }
+  .steps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .step {
+    background: var(--panel); border: 2px solid var(--border); padding: 18px;
+  }
+  .step-num {
+    font-family: 'Silkscreen', monospace; font-size: 12px; color: var(--green);
+    display: block; margin-bottom: 8px;
+  }
+  .step h3 { font-size: 15px; margin: 0 0 7px; font-weight: 700; }
+  .step p { margin: 0; font-size: 14px; color: var(--muted); }
+  code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    background: var(--panel-2); border: 1px solid var(--border);
+    padding: 2px 6px; font-size: 12.5px; color: var(--green);
+    word-break: break-all;
+  }
+  .copy-path {
+    margin-top: 12px; background: var(--panel-2); border: 2px solid var(--border);
+    color: var(--muted); font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 12px; cursor: pointer; transition: all .15s;
+  }
+  .copy-path:hover { border-color: var(--green-dark); color: var(--green); }
+  .callout {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(224,168,60,.07); border: 2px solid var(--amber-dark);
+    padding: 18px; margin-top: 24px;
+  }
+  .callout .icon { font-size: 20px; line-height: 1; flex: none; }
+  .callout p { margin: 0; font-size: 14px; color: #d8c9a4; }
+  .callout strong { color: var(--amber); }
+  footer {
+    border-top: 2px solid var(--border);
+    padding: 30px 0 50px;
+    color: #5c6874; font-size: 13px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--green); }
+  #toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translate(-50%, 90px);
+    background: var(--green); color: #06210a;
+    font-weight: 700; font-size: 13px;
+    padding: 12px 22px; border: 2px solid #06210a;
+    z-index: 999; opacity: 0;
+    transition: transform .25s ease, opacity .25s ease;
+    pointer-events: none;
+  }
+  #toast.show { transform: translate(-50%, 0); opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="brand"><span class="dot"></span> HIDE &amp; SEEK</a>
+    <div class="nav-links">
+      <a href="#mods">Mod Files</a>
+      <a href="#install">How to Install</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">READ BEFORE RECORDING</span>
+    <h1>Hide &amp; Seek <span class="accent">Mod Files</span></h1>
+    <p class="lede">
+      Download every <code>.jar</code> below and drop them into your mods folder.
+      That's it.
+    </p>
+    <div class="meta-chips">
+      <span class="meta-chip">🎮 Minecraft <b id="mc-version">1.21.1</b></span>
+      <span class="meta-chip">🧵 Loader <b id="loader-name">Fabric</b></span>
+      <span class="meta-chip">📦 <b id="mod-count">0</b> mods</span>
+    </div>
+  </header>
+
+  <div id="mods"></div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search mods…" aria-label="Search mods" />
+    </div>
+    <button class="btn btn-ghost" id="copy-list" style="flex:none;">📋 Copy List</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <div class="empty">Loading mods…</div>
+  </div>
+
+  <section id="install">
+    <h2>How to Install</h2>
+    <p class="section-sub">Follow these in order. Skip nothing.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">STEP 01</span>
+        <h3>Install the mod loader</h3>
+        <p>
+          Download the <strong id="loader-link-text">Fabric</strong> installer and run it.
+          Pick Minecraft <strong id="mc-version-2">1.21.1</strong> and hit Install.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">STEP 02</span>
+        <h3>Open your mods folder</h3>
+        <p>
+          Press <code>Win + R</code>, paste the path below, hit Enter.
+          On Mac: <code>~/Library/Application Support/minecraft/mods</code>
+        </p>
+        <button class="copy-path" data-copy="%appdata%\.minecraft\mods">📁 Copy folder path</button>
+      </div>
+
+      <div class="step">
+        <span class="step-num">STEP 03</span>
+        <h3>Drop the mods in</h3>
+        <p>
+          Download every <code>.jar</code> from this page and drag them straight into
+          that folder. Don't unzip them.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">STEP 04</span>
+        <h3>Launch &amp; check</h3>
+        <p>
+          Open the launcher, select the <strong id="loader-link-text-2">Fabric</strong> profile,
+          and start the game. If it crashes, tell me which mod it names.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="icon">⚠️</span>
+      <p>
+        <strong>Version match matters.</strong> Every mod must be for Minecraft
+        <strong id="mc-version-3">1.21.1</strong> and the <strong id="loader-name-2">Fabric</strong> loader.
+        A single mismatched mod will crash the game on startup.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Made for the hide &amp; seek video · Not affiliated with Mojang</span>
+    <a href="#mods">↑ Back to mod files</a>
+  </footer>
+
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   ✏️  EDIT THESE TWO LINES IF NEEDED
+   ============================================================ */
+const MC_VERSION = "1.21.1";
+const LOADER = "Fabric";
+
+/* ============================================================
+   Engine — you shouldn't need to touch below
+   ============================================================ */
+
+const grid = document.getElementById("grid");
+const searchInput = document.getElementById("search");
+const modCountEl = document.getElementById("mod-count");
+let allMods = [];
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
+  { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+));
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 1900);
+}
+
+async function copyText(text, msg) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+  }
+  toast(msg || "Copied!");
+}
+
+async function loadMods() {
+  try {
+    const res = await fetch("/mods.json");
+    if (!res.ok) throw new Error("Failed to load mods.json");
+    allMods = await res.json();
+    modCountEl.textContent = allMods.length;
+    render();
+  } catch (err) {
+    grid.innerHTML = `<div class="empty">
+      <p>Could not load mods. Make sure <code>public/mods.json</code> exists and you ran the build script.</p>
+    </div>`;
+  }
+}
+
+function render() {
+  const q = searchInput.value.trim().toLowerCase();
+  const filtered = allMods.filter((m) =>
+    m.name.toLowerCase().includes(q) || m.file.toLowerCase().includes(q)
+  );
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty"><p>No mods match that search.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((m) => `
+    <article class="card">
+      <div class="card-top">
+        <h3 class="card-name">${esc(m.name)}</h3>
+      </div>
+      <div class="chips">
+        <span class="chip">${esc(m.file)}</span>
+        <span class="chip">${esc(m.size)}</span>
+      </div>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="${esc(m.url)}" download>⬇ Download .jar</a>
+        <button class="btn btn-ghost" data-copy="${esc(location.origin + m.url)}" data-copy-msg="Link copied!">Copy link</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+searchInput.addEventListener("input", render);
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-copy]");
+  if (!btn) return;
+  copyText(btn.dataset.copy, btn.dataset.copyMsg || "Copied!");
+});
+
+document.getElementById("copy-list").addEventListener("click", () => {
+  const text = allMods.map((m) => `${m.name} — ${location.origin}${m.url}`).join("\n");
+  copyText(text, "Full list copied!");
+});
+
+/* Fill in the config values */
+document.getElementById("mc-version").textContent = MC_VERSION;
+document.getElementById("mc-version-2").textContent = MC_VERSION;
+document.getElementById("mc-version-3").textContent = MC_VERSION;
+document.getElementById("loader-name").textContent = LOADER;
+document.getElementById("loader-name-2").textContent = LOADER;
+document.getElementById("loader-link-text").textContent = LOADER;
+document.getElementById("loader-link-text-2").textContent = LOADER;
+
+loadMods();
+</script>
+
+</body>
+</html>
